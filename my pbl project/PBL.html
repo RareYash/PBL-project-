@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Webpage</title>
+  <style>
+    /* Reset some default browser styles */
+    body, h1, p {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "San Francisco", Arial, sans-serif; /* Specify San Francisco font with fallbacks */
+      /* Set the background image */
+      background-image: url('https://img.freepik.com/free-vector/online-tutorials-concept_52683-37480.jpg?w=1060&t=st=1712124229~exp=1712124829~hmac=9f5b1f7e4bf77e4fd06364a41844e552c8687032a2b91fc9af0b4954d71fc78f');
+      background-size: cover; /* Adjust background size */
+      background-position: center; /* Center the background image */
+      background-repeat: no-repeat; /* Prevent background image from repeating */
+      min-height: 100vh; /* Ensure the body fills the viewport */
+      display: flex; /* Use flexbox for centering */
+      flex-direction: column; /* Stack child elements vertically */
+      justify-content: space-between; /* Align items with space between */
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: rgba(255, 255, 255, 0.8); /* Add a semi-transparent white background for content */
+      text-align: center; /* Center the content */
+    }
+
+    header {
+      background-color: #333;
+      color: #fff;
+      padding: 10px 0;
+      text-align: center;
+      display: flex;
+      justify-content: space-between; /* Adjust alignment */
+    }
+
+    nav {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    nav a {
+      color: #fff; /* Change button text color */
+      text-decoration: none;
+      padding: 10px 20px;
+      border: 1px solid #fff; /* Change button border color */
+      border-radius: 5px;
+      margin: 0 5px;
+      transition: background-color 0.3s; /* Add transition effect */
+    }
+
+    nav a:hover {
+      background-color: #fff; /* Change button background color */
+      color: #333; /* Change button text color on hover */
+    }
+
+    section {
+      padding: 20px;
+      margin-top: 20px;
+      border-radius: 5px;
+    }
+
+    footer {
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 10px 0;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Welcome to My Webpage</h1>
+    <nav>
+      <a href="https://algo-dijkstra.vercel.app/" target="_blank">Insert Question</a> <!-- Add link to Home button -->
+      <a href="https://www.cs.usfca.edu/~galles/visualization/Dijkstra.html" target="_blank">Visualisation</a> <!-- Add link to About button -->
+      <a href="#">Contact</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <section>
+      <h2>Contact Us</h2>
+      <p>Email: info@example.com</p>
+      <p>Phone: 123-456-7890</p>
+    </section>
+
+    <section>
+      <h2>About Us</h2>
+      <p>This is a simple webpage template created using HTML and CSS. You can customize it according to your needs.</p>
+    </section>
+  </div>
+
+  <footer>
+    <p>&copy; 2024 My Webpage. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
