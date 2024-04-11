@@ -1,9 +1,19 @@
+// Get the drawing area element
 let blocks = document.querySelector(".drawing-area");
+
+// Initialize the addEdge variable to false
 let addEdge = false;
+
+// Initialize the node counter to 0
 let cnt = 0;
+
+// Initialize the distance array to undefined
 let dist;
 
+// Check if the alerted variable is set to "yes" in local storage
 let alerted = localStorage.getItem("alerted") || "";
+
+// If alerted is not set to "yes", show an alert and set it to "yes"
 if (alerted !== "yes") {
   alert(
     "Read instructions before proceeding by clicking i-icon in the top-right corner"
@@ -11,17 +21,24 @@ if (alerted !== "yes") {
   localStorage.setItem("alerted", "yes");
 }
 
-// It is called when user starts adding edges by clicking on button given
+// Function to enable adding edges
 const addEdges = () => {
+  // If the number of nodes is less than 2, show an alert and return
   if (cnt < 2) {
     alert("Create at least two nodes to add an edge");
     return;
   }
 
+  // Set addEdge to true
   addEdge = true;
+
+  // Disable the add-edge-enable button
   document.getElementById("add-edge-enable").disabled = true;
+
+  // Enable the run-btn button
   document.querySelector(".run-btn").disabled = false;
-  // Initializing array for adjacency matrix representation
+
+  // Initialize the distance array for adjacency matrix representation
   dist = new Array(cnt + 1)
     .fill(Infinity)
     .map(() => new Array(cnt + 1).fill(Infinity));
@@ -30,104 +47,153 @@ const addEdges = () => {
 // Temporary array to store clicked elements to make an edge between (max size = 2)
 let arr = [];
 
+// Function to append a block (node) to the drawing area
 const appendBlock = (x, y) => {
+  // Enable the reset-btn button
   document.querySelector(".reset-btn").disabled = false;
+
+  // Hide the click-instruction paragraph
   document.querySelector(".click-instruction").style.display = "none";
-  // Creating a node
+
+  // Create a new block (node) element
   const block = document.createElement("div");
+
+  // Add the block class to the block element
   block.classList.add("block");
+
+  // Set the top and left styles of the block element
   block.style.top = `${y}px`;
   block.style.left = `${x}px`;
+
+  // Set the transform style of the block element
   block.style.transform = `translate(-50%,-50%)`;
+
+  // Set the id of the block element to the current node counter value
   block.id = cnt;
 
+  // Set the text content of the block element to the current node counter value
   block.innerText = cnt++;
 
-  // Click event for node
+  // Add a click event listener to the block element
   block.addEventListener("click", (e) => {
     // Prevent node upon node
     e.stopPropagation() || (window.event.cancelBubble = "true");
 
-    // If state variable addEdge is false, can't start adding edges
+    // If addEdge is false, return
     if (!addEdge) return;
 
+    // Set the background color of the block element to coral
     block.style.backgroundColor = "coral";
+
+    // Push the id of the block element to the arr array
     arr.push(block.id);
 
-    // When two elements are pushed, draw an edge and empty the array
+    // If the length of the arr array is 2, draw an edge and empty the arr array
     if (arr.length === 2) {
       drawUsingId(arr);
       arr = [];
     }
   });
+
+  // Append the block element to the blocks element
   blocks.appendChild(block);
 };
 
-// Allow creating nodes on screen by clicking
+// Add a click event listener to the blocks element
 blocks.addEventListener("click", (e) => {
+  // If addEdge is true, return
   if (addEdge) return;
+
+  // If the number of nodes is greater than 12, show analert and return
   if (cnt > 12) {
     alert("cannot add more than 12 vertices");
     return;
   }
+
+  // Log the x and y coordinates of the click event
   console.log(e.x, e.y);
+
+  // Call the appendBlock function with the x and y coordinates of the click event
   appendBlock(e.x, e.y);
 });
 
 // Function to draw a line between nodes
 const drawLine = (x1, y1, x2, y2, ar) => {
-  // prevent multiple edges for the same pair of nodes
+  // Prevent multiple edges for the same pair of nodes
   if (dist[Number(ar[0])][Number(ar[1])] !== Infinity) {
     document.getElementById(arr[0]).style.backgroundColor = "#333";
     document.getElementById(arr[1]).style.backgroundColor = "#333";
     return;
   }
 
-  // Length of line
+  // Calculate the length of the line
   const len = Math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2);
+
+  // Calculate the slope of the line
   const slope = x2 - x1 ? (y2 - y1) / (x2 - x1) : y2 > y1 ? 90 : -90;
 
-  // Adding length to distance array
+  // Add the length to the distance array
   dist[Number(ar[0])][Number(ar[1])] = Math.round(len / 10);
   dist[Number(ar[1])][Number(ar[0])] = Math.round(len / 10);
 
-  // Drawing line
+  // Create a new line element
   const line = document.createElement("div");
+
+  // Set the id of the line element
   line.id =
     Number(ar[0]) < Number(ar[1])
       ? `line-${ar[0]}-${ar[1]}`
       : `line-${ar[1]}-${ar[0]}`;
+
+  // Add the line class to the line element
   line.classList.add("line");
+
+  // Set the width, left, top, and transform styles of the line element
   line.style.width = `${len}px`;
   line.style.left = `${x1}px`;
   line.style.top = `${y1}px`;
-
-  // Edge weight
-  let p = document.createElement("p");
-  p.classList.add("edge-weight");
-  p.innerText = Math.round(len / 10);
-  p.contentEditable = "true";
-  p.inputMode = "numeric";
-  p.addEventListener("blur", (e) => {
-    if (isNaN(Number(e.target.innerText))) {
-      alert("Enter a valid edge weight");
-      return;
-    }
-    n1 = Number(p.closest(".line").id.split("-")[1]);
-    n2 = Number(p.closest(".line").id.split("-")[2]);
-    dist[n1][n2] = Number(e.target.innerText);
-    dist[n2][n1] = Number(e.target.innerText);
-  });
   line.style.transform = `rotate(${
     x1 > x2 ? Math.PI + Math.atan(slope) : Math.atan(slope)
   }rad)`;
 
+  // Create a new p element
+  let p = document.createElement("p");
+
+  // Add the edge-weight class to the p element
+  p.classList.add("edge-weight");
+
+  // Set the text content of the p element to the length of the line
+  p.innerText = Math.round(len / 10);
+
+  // Add a blur event listener to the p element
+  p.addEventListener("blur", (e) => {
+    // If the text content of the p element is not a number, show an alert and return
+    if (isNaN(Number(e.target.innerText))) {
+      alert("Enter a valid edge weight");
+      return;
+    }
+
+    // Get the node IDs from the id of the line element
+    n1 = Number(p.closest(".line").id.split("-")[1]);
+    n2 = Number(p.closest(".line").id.split("-")[2]);
+
+    // Update the distance array with the new edge weight
+    dist[n1][n2] = Number(e.target.innerText);
+    dist[n2][n1] = Number(e.target.innerText);
+  });
+
+  // Set the transform style of the p element
   p.style.transform = `rotate(${
     x1 > x2 ? (Math.PI + Math.atan(slope)) * -1 : Math.atan(slope) * -1
   }rad)`;
 
+  // Append the p element to the line element
   line.append(p);
+
+  // Append the line element to the blocks element
   blocks.appendChild(line);
+
+  // Set the background color of the nodes to #333
   document.getElementById(arr[0]).style.backgroundColor = "#333";
   document.getElementById(arr[1]).style.backgroundColor = "#333";
 };
@@ -146,20 +212,59 @@ const drawUsingId = (ar) => {
   drawLine(x1, y1, x2, y2, ar);
 };
 
-// Function to delete a node
-function deleteNode() {
-  // Get the ID of the node to delete from the input field
-  const nodeIdToDelete = document.getElementById("delete-node-id").value;
+// Function to undo the last action
+const undo = () => {
+  // If the number of nodes is 0, return
+  if (cnt === 0) return;
 
-  // Remove the node from the DOM
-  const nodeToRemove = document.getElementById(nodeIdToDelete);
-  if (nodeToRemove) {
-    nodeToRemove.remove();
-    console.log(`Node with ID ${nodeIdToDelete} has been deleted.`);
-  } else {
-    console.log(`Node with ID ${nodeIdToDelete} not found.`);
+  // Get the last block element
+  const lastBlock = document.getElementById(`${cnt - 1}`);
+
+  // Remove the last block element from the blocks element
+  blocks.removeChild(lastBlock);
+
+  // Decrement the node counter
+  cnt--;
+
+  // If the number of nodes is greater than 1, enable the add-edge-enable button
+  if (cnt > 1) {
+    document.getElementById("add-edge-enable").disabled = false;
   }
-}
+
+  // If the number of nodes is greater than 0, enable the reset-btn button
+  if (cnt > 0) {
+    document.querySelector(".reset-btn").disabled = false;
+  }
+
+  // If the number of nodes is greater than 1, enable the run-btn button
+  if (cnt > 1) {
+    document.querySelector(".run-btn").disabled = false;
+  }
+};
+
+// Add an undo button
+const undoBtn = document.createElement("button");
+undoBtn.innerText = "Undo";
+undoBtn.addEventListener("click", undo);
+document.body.appendChild(undoBtn);
+
+// Add a click event listener to the blocks element
+blocks.addEventListener("click", (e) => {
+  // If addEdge is true, return
+  if (addEdge) return;
+
+  // If the number of nodes is greater than 12, show an alert and return
+  if (cnt > 12) {
+    alert("cannot add more than 12 vertices");
+    return;
+  }
+
+  // Log the x and y coordinates of the click event
+  console.log(e.x, e.y);
+
+  // Call the appendBlock function with the x and y coordinates of the click event
+  appendBlock(e.x, e.y);
+});
 
 // Function to find the shortest path from the given source to all other nodes
 const findShortestPath = (el) => {
@@ -260,8 +365,7 @@ const clearScreen = () => {
     line.style.height = "5px";
   });
 };
-
-const resetDrawingArea = () => {
+constresetDrawingArea = () => {
   blocks.innerHTML = "";
 
   const p = document.createElement("p");

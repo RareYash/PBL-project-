@@ -1,0 +1,49 @@
+body{
+    margin: 0;
+    min-height: 300px;
+    background-image: url("image.jpg");
+}
+h1{
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 30px;
+    color: #ffffff;
+
+}
+
+nav{
+    width: 100%;
+    float: right;
+    
+}
+
+.menu{
+    margin: 0;
+    padding: 8px;
+    height: 100%;
+   
+}
+
+.menu li{
+    display: inline;
+}
+
+.button{
+    font-family: Arial;
+    font-size: 1em;
+    font-style: none;
+    color: #ffffff;
+    padding: 8px;
+    text-decoration: none;
+    margin: 20px;
+
+}
+
+.button:link{
+ 
+    color: #ffffff;
+}
+
+.button:hover{
+    background-color: #786ed4;
+}
