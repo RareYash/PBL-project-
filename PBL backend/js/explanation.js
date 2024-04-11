@@ -14,7 +14,7 @@ let dist;
 let alerted = localStorage.getItem("alerted") || "";
 
 // If alerted is not set to "yes", show an alert and set it to "yes"
-if (alerted!== "yes") {
+if (alerted !== "yes") {
   alert(
     "Read instructions before proceeding by clicking i-icon in the top-right corner"
   );
@@ -40,8 +40,8 @@ const addEdges = () => {
 
   // Initialize the distance array for adjacency matrix representation
   dist = new Array(cnt + 1)
-   .fill(Infinity)
-   .map(() => new Array(cnt + 1).fill(Infinity));
+    .fill(Infinity)
+    .map(() => new Array(cnt + 1).fill(Infinity));
 };
 
 // Temporary array to store clicked elements to make an edge between (max size = 2)
@@ -120,7 +120,7 @@ blocks.addEventListener("click", (e) => {
 // Function to draw a line between nodes
 const drawLine = (x1, y1, x2, y2, ar) => {
   // Prevent multiple edges for the same pair of nodes
-  if (dist[Number(ar[0])][Number(ar[1])]!== Infinity) {
+  if (dist[Number(ar[0])][Number(ar[1])] !== Infinity) {
     document.getElementById(arr[0]).style.backgroundColor = "#333";
     document.getElementById(arr[1]).style.backgroundColor = "#333";
     return;
@@ -130,7 +130,7 @@ const drawLine = (x1, y1, x2, y2, ar) => {
   const len = Math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2);
 
   // Calculate the slope of the line
-  const slope = x2 - x1? (y2 - y1) / (x2 - x1) : y2 > y1? 90 : -90;
+  const slope = x2 - x1 ? (y2 - y1) / (x2 - x1) : y2 > y1 ? 90 : -90;
 
   // Add the length to the distance array
   dist[Number(ar[0])][Number(ar[1])] = Math.round(len / 10);
@@ -211,21 +211,6 @@ const drawUsingId = (ar) => {
   y2 = Number(document.getElementById(ar[1]).style.top.slice(0, -2));
   drawLine(x1, y1, x2, y2, ar);
 };
-
-// Function to delete a node
-function deleteNode() {
-  // Get the ID of the node to delete from the input field
-  const nodeIdToDelete = document.getElementById("delete-node-id").value;
-
-  // Remove the node from the DOM
-  const nodeToRemove = document.getElementById(nodeIdToDelete);
-  if (nodeToRemove) {
-    nodeToRemove.remove();
-    console.log(`Node with ID ${nodeIdToDelete} has been deleted.`);
-  } else {
-    console.log(`Node with ID ${nodeIdToDelete} not found.`);
-  }
-}
 
 // Function to find the shortest path from the given source to all other nodes
 const findShortestPath = (el) => {
