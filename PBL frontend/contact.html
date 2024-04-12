@@ -1,13 +1,100 @@
 <!DOCTYPE html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Team</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-image: url('https://source.unsplash.com/random');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            max-width: 600px;
+            width: 90%;
+            animation: fadeIn 1s ease;
+        }
 
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        h1 {
+            color: #333;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+        
+        .email {
+            font-size: 1rem;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        /* Button styles */
+        .button {
+            display: inline-block;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .button:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
 <body>
-    <div class="div1">
-     <h1>Our Team</h1>
-     <h3>Neha Jadhav : 📩nsjadhav371122@kkwagh.edu.in</h3>
-     <h3>Samrudhi Pawar : 📩sppawar371122@kkwagh.edu.in</h3>
-     <h3>Yash Mali : 📩yamali371122@kkwagh.edu.in</h3>
-     <h3>Harshal Patil : 📩hmpatil371122@kkwagh.edu.in</h3>
+    <div class="container">
+        <h1>Our Team</h1>
+        <div class="member">
+            <h3>Neha Jadhav</h3>
+            <p class="email">📩 nsjadhav371122@kkwagh.edu.in</p>
+        </div>
+        <div class="member">
+            <h3>Samrudhi Pawar</h3>
+            <p class="email">📩 sppawar371122@kkwagh.edu.in</p>
+        </div>
+        <div class="member">
+            <h3>Yash Mali</h3>
+            <p class="email">📩 yamali371122@kkwagh.edu.in</p>
+        </div>
+        <div class="member">
+            <h3>Harshal Patil</h3>
+            <p class="email">📩 hmpatil371122@kkwagh.edu.in</p>
+        </div>
+        <a href="#" class="button">Learn More</a>
     </div>
 </body>
+</html>

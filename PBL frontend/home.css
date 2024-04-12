@@ -1,49 +1,69 @@
-body{
+body {
     margin: 0;
     min-height: 300px;
     background-image: url("image.jpg");
+    font-size: 2em; /* Increase font size */
+    font-family: Arial, sans-serif; /* Use Google font */
 }
-h1{
+
+h1 {
     text-align: center;
-    font-family: 'Times New Roman', Times, serif;
-    font-size: 30px;
+    font-family: 'San Francisco', Arial, sans-serif; /* Change font to San Francisco */
     color: #ffffff;
-
 }
 
-nav{
+nav {
     width: 100%;
-    float: right;
-    
+    text-align: center; /* Center the navigation */
+    background: linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.5)); /* Dark translucent gradient background */
+    padding: 10px 0; /* Add some padding */
 }
 
-.menu{
+
+.menu {
     margin: 0;
     padding: 8px;
     height: 100%;
-   
 }
 
-.menu li{
+.menu li {
     display: inline;
 }
 
-.button{
-    font-family: Arial;
-    font-size: 1em;
+.button {
+    font-size: inherit; /* Inherit font size from body */
     font-style: none;
     color: #ffffff;
     padding: 8px;
     text-decoration: none;
     margin: 20px;
-
+    border: 2px solid transparent; /* Add border */
+    transition: border-color 0.3s ease; /* Add transition effect */
 }
 
-.button:link{
- 
-    color: #ffffff;
-}
-
-.button:hover{
+.button:hover {
     background-color: #786ed4;
+    border-color: #ffffff; /* Change border color on hover */
+}
+
+.gradient-box {
+    width: 50%;
+    margin: 100px auto 0; /* Set margin to the top */
+    background: linear-gradient(to right, #444, #222); /* Dark shaded gradient background */
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    position: relative; /* Positioning context for the anchor tag */
+}
+
+.gradient-box:hover {
+    transform: translateY(-10px); /* Move the box up by 10 pixels on hover */
+}
+
+.box-link {
+    display: block; /* Make the anchor tag a block-level element */
+    width: 100%; /* Make the anchor tag cover the entire width of the gradient box */
+    height: 100%; /* Make the anchor tag cover the entire height of the gradient box */
+    text-decoration: none; /* Remove underline from the anchor tag */
+    color: inherit; /* Inherit text color from parent */
 }

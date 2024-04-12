@@ -1,22 +1,85 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <link rel="stylesheet" href="about.css" type="text/css"/>
-    </head>
-    <body>
-        <h1>
-            Introduction to Dijkstra's Algorithm:</h1>
-            <h2> Provide a brief overview of what Dijkstra's algorithm is and its significance in computer science.</h2>
+<head>
+    <link rel="stylesheet" href="about.css" type="text/css"/>
+    <style>
+        body {
+            font-family: "San Francisco", Arial, sans-serif; /* Setting font to San Francisco */
+            overflow: hidden;
+            position: relative; /* Ensure proper positioning of background images */
+            background-color: #333; /* Dark background color */
+            color: #fff; /* White text color */
+            display: flex; /* Use flexbox */
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
+            height: 100vh; /* Set height to viewport height */
+            margin: 0; /* Remove default margin */
+            padding: 0; /* Remove default padding */
+        }
 
-<h1>History:</h1><h2> Offer a bit of background on Edsger W. Dijkstra, the Dutch computer scientist who developed the algorithm, and the context in which it was created.</h2>
+        .container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 20px;
+            padding: 20px;
+        }
 
-<h1>Key Concepts: </h1><h2>Explain the basic concepts underlying Dijkstra's algorithm, such as graphs, vertices, edges, and shortest paths.</h2>
+        .box {
+            background-image: url("https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_960_720.jpg");
+            background-size: cover;
+            padding: 20px;
+            border-radius: 10px;
+            transition: transform 0.3s; /* Transition effect on hover */
+        }
 
-<h1>Algorithm Description:</h1><h2> Provide a clear and concise explanation of how Dijkstra's algorithm works, including its steps and the logic behind each step.</h2>
-<h1>Applications:</h1><h2> Discuss real-world applications of Dijkstra's algorithm, such as finding the shortest path in transportation networks, computer networks, and routing algorithms.</h2>
+        .box:hover {
+            transform: scale(1.1); /* Scale up the box on hover */
+        }
 
-<h1>Example: </h1><h2>Walk through a simple example of applying Dijkstra's algorithm to find the shortest path in a graph, with visuals if possible.</h2>
+        h1, h2 {
+            margin: 10px 0;
+            font-weight: bold; /* Making headings bold */
+            color: #fff; /* White text color */
+        }
 
-<h1>Resources:</h1><h2> Provide links to additional resources for further reading or studying, such as books, academic papers, or online courses related to Dijkstra's algorithm and graph theory</h2>
-    </body>
+        h1 {
+            font-size: 24px;
+            border-bottom: 2px solid #fff;
+            padding-bottom: 5px;
+        }
+
+        h2 {
+            margin-top: 10px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="box">
+            <h1>Introduction to Dijkstra's Algorithm:</h1>
+            <h2>Provide a brief overview of what Dijkstra's algorithm is and its significance in computer science.</h2>
+        </div>
+        <div class="box">
+            <h1>History:</h1>
+            <h2>Offer a bit of background on Edsger W. Dijkstra, the Dutch computer scientist who developed the algorithm, and the context in which it was created.</h2>
+        </div>
+        <div class="box">
+            <h1>Key Concepts: </h1>
+            <h2>Explain the basic concepts underlying Dijkstra's algorithm, such as graphs, vertices, edges, and shortest paths.</h2>
+        </div>
+        <div class="box">
+            <h1>Algorithm Description:</h1>
+            <h2>Provide a clear and concise explanation of how Dijkstra's algorithm works, including its steps and the logic behind each step.</h2>
+        </div>
+        <div class="box">
+            <h1>Applications:</h1>
+            <h2>Discuss real-world applications of Dijkstra's algorithm, such as finding the shortest path in transportation networks, computer networks, and routing algorithms.</h2>
+        </div>
+        <div class="box">
+            <h1>Example: </h1>
+            <h2>Walk through a simple example of applying Dijkstra's algorithm to find the shortest path in a graph, with visuals if possible.</h2>
+        </div>
+    </div>
+</body>
 </html>
