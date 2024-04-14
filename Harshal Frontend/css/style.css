@@ -41,6 +41,7 @@ body {
   -webkit-box-align: start;
   -ms-flex-align: start;
   align-items: flex-start;
+  align-items: center;
 }
 
 .heading_container img {
@@ -150,10 +151,16 @@ a:focus {
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  font-size: 36px;
+  width: 200px; /* Adjust the width as needed */
+  height: auto;
+
 }
 
 .navbar-brand img {
-  width: 65px;
+  width: 200px; /* Adjust the width as needed */
+ height: auto;
+
 }
 
 .custom_nav-container {
@@ -296,13 +303,7 @@ a:focus {
   opacity: 0;
 }
 
-.overlay-content {
-  position: relative;
-  top: 30%;
-  width: 100%;
-  text-align: center;
-  margin-top: 30px;
-}
+
 
 .menu_width {
   width: 100%;
@@ -346,6 +347,16 @@ a:focus {
 
 .slider_section .detail-box h1 span {
   color: #e3691c;
+  
+}
+.detail-box h1 {
+  font-weight: bold;
+  font-size: 36px; /* Adjust font size as needed */
+  margin-top: 50px; /* Adjust top margin as needed */
+  color: #e3691c;
+
+  
+  margin-left: 40px;
 }
 
 .slider_section .detail-box .btn-box {
@@ -1136,3 +1147,12 @@ a:focus {
 
 /* end footer section*/
 /*# sourceMappingURL=style.css.map */
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  font-size: 36px;
+}
+
+.navbar-brand svg {
+  margin-right: 10px; /* Adjust spacing between logo and text */
+}
