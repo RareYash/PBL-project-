@@ -2,7 +2,6 @@ let blocks = document.querySelector(".drawing-area");
 let addEdge = false;
 let cnt = 0;
 let dist;
-let lines = []; // Array to store lines
 
 let alerted = localStorage.getItem("alerted") || "";
 if (alerted !== "yes") {
@@ -22,7 +21,7 @@ const addEdges = () => {
   addEdge = true;
   document.getElementById("add-edge-enable").disabled = true;
   document.querySelector(".run-btn").disabled = false;
-  document.querySelector(".undo-btn").disabled = false;
+  document.querySelector(".undo-btn").disabled = true;
   document.querySelector(".undo-edge-btn").disabled = false;
   // Initializing array for adjacency matrix representation
   dist = new Array(cnt + 1)
@@ -83,8 +82,8 @@ blocks.addEventListener("click", (e) => {
 const drawLine = (x1, y1, x2, y2, ar) => {
   // prevent multiple edges for the same pair of nodes
   if (dist[Number(ar[0])][Number(ar[1])] !== Infinity) {
-    document.getElementById(ar[0]).style.backgroundColor = "#333";
-    document.getElementById(ar[1]).style.backgroundColor = "#333";
+    document.getElementById(arr[0]).style.backgroundColor = "#333";
+    document.getElementById(arr[1]).style.backgroundColor = "#333";
     return;
   }
 
@@ -133,17 +132,14 @@ const drawLine = (x1, y1, x2, y2, ar) => {
 
   line.append(p);
   blocks.appendChild(line);
-  document.getElementById(ar[0]).style.backgroundColor = "#333";
-  document.getElementById(ar[1]).style.backgroundColor = "#333";
-
-  // Push the line to lines array
-  lines.push(line);
+  document.getElementById(arr[0]).style.backgroundColor = "#333";
+  document.getElementById(arr[1]).style.backgroundColor = "#333";
 };
 
 // Function to get (x, y) coordinates of clicked node
 const drawUsingId = (ar) => {
   if (ar[0] === ar[1]) {
-    document.getElementById(ar[0]).style.backgroundColor = "#333";
+    document.getElementById(arr[0]).style.backgroundColor = "#333";
     arr = [];
     return;
   }
@@ -279,7 +275,6 @@ const wait = async (t) => {
   });
   res = await pr;
 };
-
 // Function to undo the last action
 const undo = () => {
   // If the number of nodes is 0, return
@@ -309,27 +304,3 @@ const undo = () => {
     document.querySelector(".run-btn").disabled = false;
   }
 };
-
-// Function to undo the last edge
-const undoEdge = () => {
-  if (lines.length === 0) {
-    alert("No edges to undo");
-    return;
-  }
-
-  // Remove the last line from the DOM and the lines array
-  const lastLine = lines.pop();
-  lastLine.remove();
-
-  // Reset the distance in the adjacency matrix
-  const ids = lastLine.id.split("-");
-  dist[Number(ids[1])][Number(ids[2])] = Infinity;
-  dist[Number(ids[2])][Number(ids[1])] = Infinity;
-
-  // Reset the color of the nodes
-  document.getElementById(ids[1]).style.backgroundColor = "#333";
-  document.getElementById(ids[2]).style.backgroundColor = "#333";
-};
-
-// Add event listener to the undo edge button
-document.querySelector(".undo-edge-btn").addEventListener("click", undoEdge);
