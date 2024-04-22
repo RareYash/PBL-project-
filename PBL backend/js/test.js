@@ -22,7 +22,7 @@ const addEdges = () => {
   addEdge = true;
   document.getElementById("add-edge-enable").disabled = true;
   document.querySelector(".run-btn").disabled = false;
-  document.querySelector(".undo-btn").disabled = false;
+  document.querySelector(".undo-btn").disabled = true;
   document.querySelector(".undo-edge-btn").disabled = false;
   // Initializing array for adjacency matrix representation
   dist = new Array(cnt + 1)
@@ -154,61 +154,70 @@ const drawUsingId = (ar) => {
   drawLine(x1, y1, x2, y2, ar);
 };
 
-// Function to find the shortest path from the given source to all other nodes
-const findShortestPath = (el) => {
-  let visited = [];
-  let unvisited = [];
-  clearScreen();
+// Function to find the shortest path between source and destination nodes
+const findShortestPath = () => {
+  const sourceNode = parseInt(document.getElementById("source-node").value);
+  const destinationNode = parseInt(
+    document.getElementById("destination-node").value
+  );
 
-  let source = Number(document.getElementById("source-node").value);
-  if (source >= cnt || isNaN(source)) {
-    alert("Invalid source");
+  // Check if source and destination nodes are valid
+  if (
+    isNaN(sourceNode) ||
+    sourceNode >= cnt ||
+    sourceNode < 0 ||
+    isNaN(destinationNode) ||
+    destinationNode >= cnt ||
+    destinationNode < 0
+  ) {
+    alert("Invalid source or destination node");
     return;
   }
-  document.getElementById(source).style.backgroundColor = "grey";
+
+  // Perform Dijkstra's algorithm to find shortest path
+  let visited = [];
+  let unvisited = [];
   let parent = [];
-  parent[source] = -1;
-  visited = [];
-  for (let i = 0; i < cnt; i++) unvisited.push(i);
-
-  // Array containing the cost of reaching the i(th) node from the source
   let cost = [];
-  for (let i = 0; i < cnt; i++) {
-    i === source
-      ? null
-      : dist[source][i]
-      ? (cost[i] = dist[source][i])
-      : (cost[i] = Infinity);
-  }
-  cost[source] = 0;
-
-  // Array which will contain the final minimum cost
   let minCost = [];
-  minCost[source] = 0;
 
-  // Repeating until all edges are visited
+  for (let i = 0; i < cnt; i++) {
+    unvisited.push(i);
+    cost.push(Infinity);
+    minCost.push(Infinity);
+    parent.push(-1);
+  }
+
+  cost[sourceNode] = 0;
+  minCost[sourceNode] = 0;
+
   while (unvisited.length) {
-    let mini = cost.indexOf(Math.min(...cost));
+    let mini = unvisited.reduce(
+      (minIndex, node) => (cost[node] < cost[minIndex] ? node : minIndex),
+      unvisited[0]
+    );
     visited.push(mini);
-    unvisited.splice(unvisited.indexOf(mini), 1);
+    unvisited = unvisited.filter((node) => node !== mini);
 
-    // Relaxation of unvisited edges
     for (let j of unvisited) {
-      if (j === mini) continue;
-      if (cost[j] > dist[mini][j] + cost[mini]) {
-        minCost[j] = dist[mini][j] + cost[mini];
-        cost[j] = dist[mini][j] + cost[mini];
+      if (dist[mini][j] < Infinity && cost[j] > dist[mini][j] + cost[mini]) {
+        minCost[j] = cost[j] = dist[mini][j] + cost[mini];
         parent[j] = mini;
-      } else {
-        minCost[j] = cost[j];
       }
     }
-    cost[mini] = Infinity;
   }
-  console.log("Minimum Cost", minCost);
-  for (let i = 0; i < cnt; i++)
-    parent[i] === undefined ? (parent[i] = source) : null;
-  indicatePath(parent, source);
+
+  // Display the shortest path
+  if (minCost[destinationNode] === Infinity) {
+    alert("No path found");
+  } else {
+    let path = [];
+    for (let i = destinationNode; i !== sourceNode; i = parent[i]) {
+      path.unshift(i);
+    }
+    path.unshift(sourceNode);
+    alert("Shortest path: " + path.join(" -> "));
+  }
 };
 
 const indicatePath = async (parentArr, src) => {
@@ -317,7 +326,7 @@ const undoEdge = () => {
     return;
   }
 
-  // Remove the last line from the DOM and the lines array
+  // Pop the last line from the lines array
   const lastLine = lines.pop();
   lastLine.remove();
 
@@ -329,7 +338,46 @@ const undoEdge = () => {
   // Reset the color of the nodes
   document.getElementById(ids[1]).style.backgroundColor = "#333";
   document.getElementById(ids[2]).style.backgroundColor = "#333";
+
+  // Exit the function after removing one edge
+  return;
 };
 
 // Add event listener to the undo edge button
-document.querySelector(".undo-edge-btn").addEventListener("click", undoEdge);
+//document.querySelector(".undo-edge-btn").addEventListener("click", undoEdge);
+
+// Function to delete a node and its adjacent edges
+const deleteNode = () => {
+  const deleteNodeId = parseInt(
+    document.getElementById("delete-node-input").value
+  );
+
+  // Check if the node to delete is valid
+  if (isNaN(deleteNodeId) || deleteNodeId >= cnt || deleteNodeId < 0) {
+    alert("Invalid node to delete");
+    return;
+  }
+
+  // Remove the node from the DOM
+  const nodeToDelete = document.getElementById(deleteNodeId);
+  nodeToDelete.remove();
+
+  // Remove adjacent edges from the lines array and DOM
+  lines = lines.filter((line) => {
+    const ids = line.id.split("-");
+    const node1 = Number(ids[1]);
+    const node2 = Number(ids[2]);
+    if (node1 === deleteNodeId || node2 === deleteNodeId) {
+      line.remove();
+      dist[node1][node2] = Infinity;
+      dist[node2][node1] = Infinity;
+      return false; // Remove the line from lines array
+    }
+    return true; // Keep the line in lines array
+  });
+};
+
+// Add event listener to the delete node button
+document
+  .querySelector(".delete-node-btn")
+  .addEventListener("click", deleteNode);

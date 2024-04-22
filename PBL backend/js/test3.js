@@ -154,61 +154,74 @@ const drawUsingId = (ar) => {
   drawLine(x1, y1, x2, y2, ar);
 };
 
-// Function to find the shortest path from the given source to all other nodes
-const findShortestPath = (el) => {
-  let visited = [];
-  let unvisited = [];
-  clearScreen();
+// Function to find the shortest path between source and destination nodes
+const findShortestPath = () => {
+  const sourceNode = parseInt(document.getElementById("source-node").value);
+  const destinationNode = parseInt(
+    document.getElementById("destination-node").value
+  );
 
-  let source = Number(document.getElementById("source-node").value);
-  if (source >= cnt || isNaN(source)) {
-    alert("Invalid source");
+  // Check if source and destination nodes are valid
+  if (
+    isNaN(sourceNode) ||
+    sourceNode >= cnt ||
+    sourceNode < 0 ||
+    isNaN(destinationNode) ||
+    destinationNode >= cnt ||
+    destinationNode < 0
+  ) {
+    alert("Invalid source or destination node");
     return;
   }
-  document.getElementById(source).style.backgroundColor = "grey";
+
+  // Perform Dijkstra's algorithm to find shortest path
+  let visited = [];
+  let unvisited = [];
   let parent = [];
-  parent[source] = -1;
-  visited = [];
-  for (let i = 0; i < cnt; i++) unvisited.push(i);
-
-  // Array containing the cost of reaching the i(th) node from the source
   let cost = [];
-  for (let i = 0; i < cnt; i++) {
-    i === source
-      ? null
-      : dist[source][i]
-      ? (cost[i] = dist[source][i])
-      : (cost[i] = Infinity);
-  }
-  cost[source] = 0;
-
-  // Array which will contain the final minimum cost
   let minCost = [];
-  minCost[source] = 0;
 
-  // Repeating until all edges are visited
+  for (let i = 0; i < cnt; i++) {
+    unvisited.push(i);
+    cost.push(Infinity);
+    minCost.push(Infinity);
+    parent.push(-1);
+  }
+
+  cost[sourceNode] = 0;
+  minCost[sourceNode] = 0;
+
   while (unvisited.length) {
-    let mini = cost.indexOf(Math.min(...cost));
+    let mini = unvisited.reduce(
+      (minIndex, node) => (cost[node] < cost[minIndex] ? node : minIndex),
+      unvisited[0]
+    );
     visited.push(mini);
-    unvisited.splice(unvisited.indexOf(mini), 1);
+    unvisited = unvisited.filter((node) => node !== mini);
 
-    // Relaxation of unvisited edges
     for (let j of unvisited) {
-      if (j === mini) continue;
-      if (cost[j] > dist[mini][j] + cost[mini]) {
-        minCost[j] = dist[mini][j] + cost[mini];
-        cost[j] = dist[mini][j] + cost[mini];
+      if (dist[mini][j] < Infinity && cost[j] > dist[mini][j] + cost[mini]) {
+        minCost[j] = cost[j] = dist[mini][j] + cost[mini];
         parent[j] = mini;
-      } else {
-        minCost[j] = cost[j];
       }
     }
-    cost[mini] = Infinity;
   }
-  console.log("Minimum Cost", minCost);
-  for (let i = 0; i < cnt; i++)
-    parent[i] === undefined ? (parent[i] = source) : null;
-  indicatePath(parent, source);
+
+  // Display the shortest path
+  if (minCost[destinationNode] === Infinity) {
+    alert("No path found");
+  } else {
+    let path = [];
+    for (let i = destinationNode; i !== sourceNode; i = parent[i]) {
+      path.unshift(i);
+    }
+    path.unshift(sourceNode);
+    // alert("Shortest path: " + path.join(" -> "));
+
+    document.querySelector(".path").innerHTML = "";
+    innerText = "Shortest path: " + path.join(" -> ");
+    document.querySelector(".path").style.padding = "1rem";
+  }
 };
 
 const indicatePath = async (parentArr, src) => {
