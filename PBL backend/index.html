@@ -34,9 +34,14 @@
             inputmode="numeric"
             id="source-node"
             placeholder="Source Node" />
+          <input
+            type="text"
+            inputmode="numeric"
+            id="destination-node"
+            placeholder="Destination Node" />
           <button
             class="outline-btn run-btn"
-            onclick="findShortestPath(this)"
+            onclick="findShortestPath()"
             disabled="">
             Run
           </button>
@@ -44,6 +49,24 @@
         <div>
           <button class="outline-btn undo-btn" onclick="undo()" disabled="">
             Undo Node
+          </button>
+        </div>
+        <div>
+          <button
+            class="outline-btn undo-edge-btn"
+            onclick="undoEdge()"
+            disabled="">
+            Undo Edge
+          </button>
+        </div>
+        <div>
+          <input
+            type="text"
+            inputmode="numeric"
+            id="delete-node-input"
+            placeholder="Node to delete" />
+          <button class="outline-btn delete-node-btn" onclick="deleteNode()">
+            Delete Node
           </button>
         </div>
       </div>
@@ -54,6 +77,6 @@
     <div class="path"></div>
     <script src="js/gsap.min.js"></script>
     <script src="js/gsap.js"></script>
-    <script src="js/script.js"></script>
+    <script src="js/test.js"></script>
   </body>
 </html>

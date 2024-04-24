@@ -336,3 +336,39 @@ const undoEdge = () => {
 
 // Add event listener to the undo edge button
 //document.querySelector(".undo-edge-btn").addEventListener("click", undoEdge);
+
+// Function to delete a node and its adjacent edges
+const deleteNode = () => {
+  const deleteNodeId = parseInt(
+    document.getElementById("delete-node-input").value
+  );
+
+  // Check if the node to delete is valid
+  if (isNaN(deleteNodeId) || deleteNodeId >= cnt || deleteNodeId < 0) {
+    alert("Invalid node to delete");
+    return;
+  }
+
+  // Remove the node from the DOM
+  const nodeToDelete = document.getElementById(deleteNodeId);
+  nodeToDelete.remove();
+
+  // Remove adjacent edges from the lines array and DOM
+  lines = lines.filter((line) => {
+    const ids = line.id.split("-");
+    const node1 = Number(ids[1]);
+    const node2 = Number(ids[2]);
+    if (node1 === deleteNodeId || node2 === deleteNodeId) {
+      line.remove();
+      dist[node1][node2] = Infinity;
+      dist[node2][node1] = Infinity;
+      return false; // Remove the line from lines array
+    }
+    return true; // Keep the line in lines array
+  });
+};
+
+// Add event listener to the delete node button
+document
+  .querySelector(".delete-node-btn")
+  .addEventListener("click", deleteNode);
