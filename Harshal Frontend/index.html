@@ -26,6 +26,8 @@
     <link href="css/style.css" rel="stylesheet" />
     <!-- responsive style -->
     <link href="css/responsive.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   </head>
 
   <body>
@@ -36,9 +38,9 @@
           <nav class="navbar navbar-expand-lg custom_nav-container">
             <a class="navbar-brand" href="index.html">
               <img
-                src="images/mylogo.png"
+                src="images/mainlogo2.jpg"
                 alt=""
-                style="width: 128px; height: 128px" />
+                style="width: 128px; " />
             </a>
             <div class="" id="">
               <div class="User_option">
@@ -47,23 +49,32 @@
                 </form>
               </div>
 
-              <div class="custom_menu-btn">
-                <button onclick="openNav()">
-                  <span class="s-1"> </span>
-                  <span class="s-2"> </span>
-                  <span class="s-3"> </span>
-                </button>
-              </div>
-              <div id="myNav" class="overlay">
-                <div class="overlay-content">
-                  <a href="index.html">Home</a>
-                  <a href="about.html">About</a>
-                  <a href="contact.html">Contact Us</a>
+             <div>
+              <nav class="navbar navbar-expand-lg bg-body-tertiary">
+                <div class="container-fluid">
+                  <a class="navbar-brand" href="#"></a>
+                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                      <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#">Practice</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="./about.html">About</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link " href="./contact.html" >Contact Us</a>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
-              </div>
-            </div>
-          </nav>
-        </div>
+              </nav>
+             </div>
       </header>
       <!-- end header section -->
       <!-- slider section -->
@@ -124,12 +135,7 @@
           <p>
           Welcome to DIJKSTRA , where we specialize in simplifying the complexities of Dijkstra's algorithm and pathfinding challenges. Our team of dedicated experts is passionate about delivering efficient solutions to help you navigate through intricate networks and optimize your routes. With a commitment to innovation and user-centric design, we strive to empower individuals and businesses alike to conquer their graph theory dilemmas effortlessly. Join us on this journey as we pave the way for seamless navigation and problem-solving in the world of algorithms.
           </p>
-          <div class="btn-box">
-            <a href="">
-              <span> Read More </span>
-              <img src="images/link-arrow.png" alt="" />
-            </a>
-          </div>
+          
         </div>
       </div>
     </section>
@@ -146,46 +152,38 @@
         <div class="animal_container">
           <div class="box b1">
             <div class="img-box">
-              <img src="images/dog.jpg" alt="" />
+              <img src="./images/harshal.jpg" alt="" />
             </div>
             <div class="detail-box">
               <h5>Harshal Patil</h5>
-              <p>
-                text
-              </p>
+              
             </div>
           </div>
           <div class="box b2">
             <div class="img-box">
-              <img src="images/bird.jpg" alt="" />
+              <img src="./images/yash1.jpg" alt="" />
             </div>
             <div class="detail-box">
               <h5>Yash Mali</h5>
-              <p>
-                text
-              </p>
+              
             </div>
           </div>
           <div class="box b1">
             <div class="img-box">
-              <img src="images/fish.jpg" alt="" />
+              <img src="./images/sam.jpg" alt="" />
             </div>
             <div class="detail-box">
               <h5>Samrudhi Pawar</h5>
-              <p>
-                text
-              </p>
+              
             </div>
           </div>
           <div class="box b2">
             <div class="img-box">
-              <img src="images/cat.jpg" alt="" />
+              <img src="./images/neha1.jpg" alt="" />
             </div>
             <div class="detail-box">
               <h5>Neha Jadhav</h5>
-              <p>
-                text
-              </p>
+              
             </div>
           </div>
         </div>
@@ -495,22 +493,11 @@
               </div>
               <div>
                 <img src="images/mail.png" alt="" />
-                <p>demo@gmail.com</p>
+                <p>dijkstras@gmail.com</p>
               </div>
             </div>
           </div>
-          <div class="col-md-6 col-lg-3">
-            <div class="info_time">
-              <h5>Opening Hours Shop</h5>
-              <div>
-                <p>Monday to friday</p>
-              </div>
-              <div>
-                <p>07:00 am to 04:00 pm</p>
-              </div>
-            </div>
-          </div>
-
+          
           <div class="col-md-6 col-lg-3">
             <div class="info_social">
               <h5>social media</h5>
@@ -538,15 +525,7 @@
               </div>
             </div>
           </div>
-          <div class="col-md-6 col-lg-3">
-            <div class="info_form pl-lg-4">
-              <h5>Newsletter</h5>
-              <form action="">
-                <input type="text" placeholder="Enter Your Email" />
-                <button type="submit">Subscribe</button>
-              </form>
-            </div>
-          </div>
+         
         </div>
       </div>
     </section>
@@ -556,8 +535,8 @@
     <!-- footer section -->
     <section class="container-fluid footer_section">
       <p>
-        &copy; 2019 All Rights Reserved. Design by
-        <a href="https://html.design/">Free Html Templates</a>
+        &copy; 2019 All Rights Reserved. 
+        <a href="https://html.design/"></a>
       </p>
     </section>
     <!-- end  footer section -->
